@@ -1,0 +1,1 @@
+import{j as s}from"./client-182d8dba.js";const a=({forInput:e,value:t,className:o,children:r})=>s("label",{htmlFor:e,className:"block font-medium text-sm text-gray-700 "+o,children:t||r}),m=a;export{m as I};
