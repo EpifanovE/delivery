@@ -29,6 +29,15 @@ class Service extends Model implements HasImage, Sortable
         'attributes' => 'array',
     ];
 
+    protected static function booted()
+    {
+        static::deleted(function ($service) {
+            if (!empty($service->image)) {
+                $service->image->delete();
+            }
+        });
+    }
+
     public function getPriceAttribute($value)
     {
         return $value / 100;

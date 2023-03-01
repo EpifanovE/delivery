@@ -3,11 +3,13 @@
 namespace App\Models\Bot;
 
 use App\Exceptions\DomainException;
+use App\Models\Attachment\Attachment;
 use App\Models\Subscriber\Subscriber;
 use App\Services\Telegram\BotTypes\BotType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @property string $token
@@ -30,6 +32,24 @@ class Bot extends Model
     ];
 
     protected ?BotType $typeObject = null;
+
+    protected static function booted()
+    {
+        static::deleted(function ($bot) {
+            if (!empty($bot->settings) && !empty($bot->settings['image'])) {
+
+                if (is_array($bot['settings']['image'])) {
+                    return;
+                }
+
+                $attachment =  Attachment::where('id', $bot['settings']['image'])->first();
+
+                if (!empty($attachment)) {
+                    $attachment->delete();
+                }
+            }
+        });
+    }
 
     public function handle()
     {
