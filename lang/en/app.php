@@ -95,6 +95,7 @@ return [
         'set_webhook' => 'Set webhook',
         'remove_webhook' => 'Remove webhook',
         'add' => 'Add',
+        'set_commands' => 'Set commands',
     ],
     'messages' => [
         'confirm' => 'Are you sure you want to do this?',

@@ -35,4 +35,19 @@ class TelegramService
         $response = $telegram->removeWebhook();
         $bot->update(['webhook' => false]);
     }
+
+    public function setCommands(Bot $bot)
+    {
+        $commands = $bot->getCommandsList();
+
+        if (empty($commands)) {
+            return;
+        }
+
+        $telegram = new Api($bot->token);
+
+        $telegram->setMyCommands([
+            'commands' => $commands,
+        ]);
+    }
 }

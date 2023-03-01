@@ -25,6 +25,16 @@ class DeliveryType extends BotType
         $this->api->commandsHandler(true);
     }
 
+    public function getCommandsList(): array
+    {
+        return [
+            [
+                'command' => '/start',
+                'description' => 'Начало работы с ботом.',
+            ],
+        ];
+    }
+
     protected function getCommands(): array
     {
         return [

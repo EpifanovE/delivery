@@ -36,6 +36,11 @@ class Bot extends Model
         $this->getTypeObject()->handle();
     }
 
+    public function getCommandsList(): array
+    {
+        return $this->getTypeObject()->getCommandsList();
+    }
+
     protected function getTypeObject(): BotType
     {
         if (is_null($this->typeObject)) {

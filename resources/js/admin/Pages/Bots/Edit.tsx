@@ -38,7 +38,7 @@ const Edit: FC<EditProps> = (props) => {
         name: item?.data?.name || '',
         type: item?.data?.type || '',
         token: item?.data?.token || '',
-        settings: item?.data?.settings || {}
+        settings: item?.data?.settings || {},
     });
 
     useEffect(() => {
@@ -83,6 +83,11 @@ const Edit: FC<EditProps> = (props) => {
         router.post(route(`bots.removeWebHook`, {bot: item.data.id}));
     }
 
+    const setCommands = () => {
+        if (!item) return;
+        router.post(route(`bots.setCommands`, {bot: item.data.id}));
+    }
+
     const changeSettings = (value: any) => {
         setData('settings', value);
     }
@@ -107,15 +112,27 @@ const Edit: FC<EditProps> = (props) => {
                                 <>
                                     {
                                         item?.data.webhook ? (
-                                            <Button
-                                                variant={'primaryOutline'}
-                                                type={'button'}
-                                                disabled={processing}
-                                                onClick={removeWebHook}
-                                                className={'mr-2'}
-                                            >
-                                                {t('buttons.remove_webhook')}
-                                            </Button>
+                                            <>
+                                                <Button
+                                                    variant={'primaryOutline'}
+                                                    type={'button'}
+                                                    disabled={processing}
+                                                    onClick={removeWebHook}
+                                                    className={'mr-2'}
+                                                >
+                                                    {t('buttons.remove_webhook')}
+                                                </Button>
+
+                                                <Button
+                                                    variant={'primaryOutline'}
+                                                    type={'button'}
+                                                    disabled={processing}
+                                                    onClick={setCommands}
+                                                    className={'mr-2'}
+                                                >
+                                                    {t('buttons.set_commands')}
+                                                </Button>
+                                            </>
                                         ) : (
                                             <Button
                                                 variant={'primaryOutline'}
@@ -286,6 +303,7 @@ const Edit: FC<EditProps> = (props) => {
                             data.type === 'delivery' &&
                             <DeliverySettings value={data.settings} onChange={changeSettings}/>
                         }
+
                     </Container>
                 </form>
             </div>

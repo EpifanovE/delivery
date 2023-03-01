@@ -12,7 +12,7 @@ abstract class Command  extends \Telegram\Bot\Commands\Command
 {
     protected BotType $botType;
 
-    protected Subscriber $subscriber;
+    protected ?Subscriber $subscriber = null;
 
     public function __construct(BotType $botType)
     {

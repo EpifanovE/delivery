@@ -15,6 +15,8 @@ abstract class BotType
 
     abstract public function handle(): void;
 
+    abstract public function getCommandsList(): array;
+
     public function getBot(): Bot
     {
         return $this->bot;

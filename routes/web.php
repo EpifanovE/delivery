@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
     Route::post('bots/{bot}/setWebHook', [BotController::class, 'setWebHook'])->name('bots.setWebHook');
     Route::post('bots/{bot}/removeWebHook', [BotController::class, 'removeWebHook'])->name('bots.removeWebHook');
+    Route::post('bots/{bot}/setCommands', [BotController::class, 'setCommands'])->name('bots.setCommands');
     Route::resource('bots', BotController::class)->except('show');
 
     Route::resource('users', UserController::class)->except('show');

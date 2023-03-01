@@ -88,4 +88,10 @@ class BotController extends Controller
         $this->telegramService->removeWebHook($bot);
         return redirect()->back()->with(['message' => __('messages.webhook_removed')]);
     }
+
+    public function setCommands(Bot $bot)
+    {
+        $this->telegramService->setCommands($bot);
+        return redirect()->back()->with(['message' => __('messages.commands_set')]);
+    }
 }
