@@ -13,10 +13,15 @@ return new class extends Migration
             $table->integer("code");
             $table->json("payload")->nullable();
             $table->bigInteger("subscriber_id")->unsigned()->nullable();
+            $table->bigInteger("bot_id")->unsigned()->nullable();
             $table->timestamp('created_at')->nullable();
 
             $table->foreign('subscriber_id')
                 ->references('id')->on('subscribers')
+                ->onDelete('set null');
+
+            $table->foreign('bot_id')
+                ->references('id')->on('bots')
                 ->onDelete('set null');
         });
     }

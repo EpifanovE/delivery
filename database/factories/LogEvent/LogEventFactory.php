@@ -17,6 +17,7 @@ class LogEventFactory extends Factory
         return [
             'code' => Code::Visit,
             'subscriber_id' => $this->faker->numberBetween(1, 50),
+            'bot_id' => $this->faker->numberBetween(1, 2),
             'created_at' => $date,
         ];
     }

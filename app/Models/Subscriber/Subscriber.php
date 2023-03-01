@@ -43,6 +43,15 @@ class Subscriber extends Model
         $this->save();
     }
 
+    public function scopeBot(Builder $query, ?int $botId = null)
+    {
+        if (!empty($botId)) {
+            $query->whereHas('bots', function(Builder $query) use ($botId) {
+                $query->where('id', $botId);
+            });
+        }
+    }
+
     public function scopeSearch(Builder $query, string $search)
     {
         $query

@@ -2,6 +2,7 @@
 
 namespace App\Models\LogEvent;
 
+use App\Models\Bot\Bot;
 use App\Models\Subscriber\Subscriber;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,7 @@ class LogEvent extends Model
         "code",
         "payload",
         "subscriber_id",
+        "bot_id",
         "created_at",
     ];
 
@@ -31,6 +33,18 @@ class LogEvent extends Model
     public function subscriber(): BelongsTo
     {
         return $this->belongsTo(Subscriber::class);
+    }
+
+    public function bot(): BelongsTo
+    {
+        return $this->belongsTo(Bot::class);
+    }
+
+    public function scopeBot(Builder $query, ?int $botId = null)
+    {
+        if (!empty($botId)) {
+            $query->where('bot_id', $botId);
+        }
     }
 
     public function scopeCode(Builder $query, Code $code)

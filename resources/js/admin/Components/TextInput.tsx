@@ -29,6 +29,7 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function textInput(
         isFocused,
         handleChange,
         readOnly,
+        disabled,
         step,
         min,
         max,
@@ -48,14 +49,15 @@ export default forwardRef<HTMLInputElement, TextInputProps>(function textInput(
             id={id}
             value={value}
             className={
-                `border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-sm shadow-sm ` +
-                className
+                `border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-sm shadow-sm disabled:bg-gray-300 ` +
+                (className ? className : '')
             }
             ref={input}
             autoComplete={autoComplete}
             required={required}
             onChange={(e) => !!handleChange && handleChange(e)}
             readOnly={readOnly}
+            disabled={disabled}
             step={step}
             min={min}
             max={max}

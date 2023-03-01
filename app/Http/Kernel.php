@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\TelegramSubscriberMiddleware;
+use App\Http\Middleware\TelegramBlock;
+use App\Http\Middleware\TelegramSubscriber;
+use App\Http\Middleware\TelegramTouch;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -42,7 +44,9 @@ class Kernel extends HttpKernel
         ],
 
         'telegram' => [
-            TelegramSubscriberMiddleware::class,
+            TelegramSubscriber::class,
+            TelegramBlock::class,
+            TelegramTouch::class,
         ],
 
         'api' => [

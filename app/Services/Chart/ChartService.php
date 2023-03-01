@@ -32,9 +32,14 @@ class ChartService
      * @param string $detailing Детализация: day, month
      * @return array
      */
-    public function newSubscribersChart(Carbon $from, Carbon $to, string $detailing = 'day'): array
+    public function newSubscribersChart(Carbon $from, Carbon $to, string $detailing = 'day', ?int $botId = null): array
     {
-        $query = DB::table('subscribers');
+        $query = DB::table('log_events')
+            ->where('code', Code::Start->value);
+
+        if (!empty($botId)) {
+            $query->where('bot_id', $botId);
+        }
 
         return $this->createChartData($query, $from, $to, $detailing);
     }
@@ -47,10 +52,15 @@ class ChartService
      * @param string $detailing Детализация: day, month
      * @return array
      */
-    public function visitsChart(Carbon $from, Carbon $to, string $detailing = 'day'): array
+    public function visitsChart(Carbon $from, Carbon $to, string $detailing = 'day', ?int $botId = null): array
     {
         $query = DB::table('log_events')
             ->where('code', Code::Visit->value);
+
+        if (!empty($botId)) {
+            $query->where('bot_id', $botId);
+        }
+
 
         return $this->createChartData($query, $from, $to, $detailing);
     }

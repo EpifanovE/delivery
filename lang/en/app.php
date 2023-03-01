@@ -78,6 +78,8 @@ return [
     'message' => 'Message',
     'start_message' => 'Start message',
     'image' => 'Image',
+    'all_bots' => 'All bots',
+    'custom_period' => 'Custom period',
     'buttons' => [
         'save' => 'Save',
         'edit' => 'Edit',

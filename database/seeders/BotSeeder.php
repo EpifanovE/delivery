@@ -20,5 +20,11 @@ class BotSeeder extends Seeder
             'type' => 'delivery',
             'token' => env('BOT_TOKEN'),
         ]);
+
+        Bot::factory()->count(1)->create([
+            'name' => 'Второй бот',
+            'type' => 'delivery',
+            'token' => 'token123',
+        ]);
     }
 }

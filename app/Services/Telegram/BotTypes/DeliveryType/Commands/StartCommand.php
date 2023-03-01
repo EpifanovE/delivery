@@ -6,7 +6,6 @@ namespace App\Services\Telegram\BotTypes\DeliveryType\Commands;
 
 use App\Models\Attachment\Attachment;
 use App\Models\Bot\Command;
-use Illuminate\Support\Facades\Log;
 use Telegram\Bot\FileUpload\InputFile;
 
 class StartCommand extends Command
@@ -15,10 +14,17 @@ class StartCommand extends Command
 
     public function handle()
     {
-        $message = $this->botType->getBot()->settings['start_message'] ?? '';
+        $message = $this->botType->getBot()->settings['start_message'] ?? null;
         $attachmentId = $this->botType->getBot()->settings['image'] ?? null;
 
-        Log::notice($attachmentId);
+        if (empty($message)) {
+            $this->replyWithMessage([
+                'text' => __('bot.hello_message'),
+                'parse_mode' => 'html',
+            ]);
+
+            return;
+        }
 
         if (!empty($attachmentId)) {
             $attachment = Attachment::where('id', $attachmentId)->first();

@@ -22,6 +22,7 @@ import {
     Legend,
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
+import {BotServerCollectionItem} from "../types/bots";
 
 ChartJS.register(
     CategoryScale,
@@ -41,6 +42,9 @@ type ChartData = {
 type DashboardProps = {
     auth?: any
     errors?: any
+    bots: {
+        data: BotServerCollectionItem[]
+    }
     subscribers: number
     new_subscribers: number
     visits: number,
@@ -57,6 +61,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
     const {t} = useTranslation();
 
     const {
+        bots,
         subscribers,
         new_subscribers,
         visits,
@@ -65,11 +70,12 @@ const Dashboard: FC<DashboardProps> = (props) => {
     } = props;
 
     const {
-        data: {period, detailing, from, to},
+        data: {bot, period, detailing, from, to},
         setData,
         post,
         transform,
     } = useForm<{ [key: string]: any }>({
+        bot: '',
         period: 'week',
         detailing: 'day',
         from: null,
@@ -111,6 +117,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
     transform((data) => {
         return {
+            bot,
             detailing,
             from: data.from.format('YYYY-MM-DD'),
             to: data.to.format('YYYY-MM-DD'),
@@ -175,6 +182,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
             <div className="py-12">
                 <div
                     className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12 flex flex-wrap grid grid-cols-1 lg:grid-cols-3 gap-8">
+
                     <div className='p-8 bg-red-300 w-full shadow rounded-sm text-gray-800'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('subscribers')}</p>
                         <h2 className='text-5xl font-semibold mb-2'>
@@ -199,36 +207,35 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12">
                     <div
-                        className="bg-white overflow-hidden shadow rounded-sm p-8 flex flex-col lg:flex-row wrap gap-8">
+                        className="bg-white overflow-hidden shadow rounded-sm p-8 flex flex-col lg:flex-row wrap gap-4">
+
                         <div>
-                            <Button
-                                variant={period === 'week' ? 'primary' : 'primaryOutline'}
-                                className='rounded-r-0 border-r-0'
-                                onClick={() => handleChangePeriod('week')}
+                            <SelectInput
+                                value={bot}
+                                handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => setData('bot', e.target.value)}
+                                defaultValue={bot}
                             >
-                                {t('week')}
-                            </Button>
-                            <Button
-                                variant={period === 'month' ? 'primary' : 'primaryOutline'}
-                                className='rounded-r-0 rounded-left-0 border-r-0'
-                                onClick={() => handleChangePeriod('month')}
+                                <option value="">{t('all_bots')}</option>
+                                {
+                                    bots && bots.data.map(bot => <option value={bot.id} key={bot.id}>{bot.name}</option>)
+                                }
+                            </SelectInput>
+                        </div>
+
+                        <div>
+
+                            <SelectInput
+                                value={period}
+                                handleChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChangePeriod(e.target.value as Period)}
+                                defaultValue={period}
                             >
-                                {t('month')}
-                            </Button>
-                            <Button
-                                variant={period === 'quarter' ? 'primary' : 'primaryOutline'}
-                                className='rounded-r-0 rounded-left-0 border-r-0'
-                                onClick={() => handleChangePeriod('quarter')}
-                            >
-                                {t('quarter')}
-                            </Button>
-                            <Button
-                                variant={period === 'year' ? 'primary' : 'primaryOutline'}
-                                className='rounded-left-0'
-                                onClick={() => handleChangePeriod('year')}
-                            >
-                                {t('year')}
-                            </Button>
+                                <option value="">{t('custom_period')}</option>
+                                <option value="week">{t('week')}</option>
+                                <option value="month">{t('month')}</option>
+                                <option value="quarter">{t('quarter')}</option>
+                                <option value="year">{t('year')}</option>
+                            </SelectInput>
+
                         </div>
 
                         <div className='flex gap-2'>
@@ -240,6 +247,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
                                     handleChange={handleDateChange}
                                     type='date'
                                     name={'from'}
+                                    disabled={period !== ''}
                                 />
                             </div>
 
@@ -251,6 +259,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
                                     handleChange={handleDateChange}
                                     type='date'
                                     name={'to'}
+                                    disabled={period !== ''}
                                 />
                             </div>
                         </div>

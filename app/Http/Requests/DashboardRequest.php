@@ -16,6 +16,7 @@ class DashboardRequest extends FormRequest
     public function rules()
     {
         return [
+            'bot' => ['nullable', 'string',],
             'from' => ['nullable', 'string',],
             'to' => ['nullable', 'string',],
             'detailing' => ['nullable', 'string',],
