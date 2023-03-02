@@ -66,4 +66,9 @@ class Subscriber extends Model
     {
         $query->whereDate('created_at', Carbon::today())->get();
     }
+
+    public function scopeDemo(Builder $query)
+    {
+        $query->where('tid', '<', 1000);
+    }
 }

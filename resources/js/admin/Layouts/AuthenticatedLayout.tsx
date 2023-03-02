@@ -1,4 +1,4 @@
-import {FC, Fragment, useEffect, useState} from 'react';
+import {FC, Fragment, useEffect, useState,} from 'react';
 import {Transition} from '@headlessui/react';
 import Dropdown from '../Components/Dropdown';
 import {User} from "../types/general";
@@ -9,7 +9,6 @@ import Button from "../Components/Button";
 import BarsIcon from "../Components/Icons/BarsIcon";
 import SidebarItem from "../Components/Sidebar/SidebarItem";
 import UserIcon from "../Components/Icons/UserIcon";
-import ArrowDownIcon from "../Components/Icons/ArrowDownIcon";
 import DashboardIcon from "../Components/Icons/DashboardIcon";
 import BotIcon from "../Components/Icons/BotIcon";
 import UserLockIcon from "../Components/Icons/UserLockIcon";
@@ -21,7 +20,7 @@ type AuthenticatedProps = {
             data: User
         }
     }
-    errors?: any
+    errors?: {[key: string]: string}
     header?: any
     children?: any
     flash?: {
@@ -33,10 +32,11 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
 
     const {t} = useTranslation();
 
-    const { auth, header, children, flash } = props;
+    const { auth, header, children, flash, errors, } = props;
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const [showFlash, setShowFlash] = useState(false);
+    const [showErrors, setShowErrors] = useState<string[]>([]);
 
     useEffect(() => {
         if (flash?.message) {
@@ -58,6 +58,16 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
             setSidebarOpen(true);
         }
     }, []);
+
+    useEffect(() => {
+        if (errors) {
+            setShowErrors(Object.keys(errors));
+        }
+    }, [errors]);
+
+    const handleErrorClose = (code: string) => {
+        setShowErrors(showErrors.filter(errorCode => errorCode !== code));
+    }
 
     return (
         <>
@@ -170,7 +180,7 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
                             enter="transition transition-opacity ease-out duration-300"
                             enterFrom="opacity-0"
                             enterTo="opacity-100"
-                            leave="ease-in duration-75"
+                            leave="ease-in duration-100"
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
@@ -178,6 +188,34 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
                                 <Message onClose={() => setShowFlash(false)} variant={'success'}>{flash?.message}</Message>
                             </div>
                         </Transition>
+
+                        {
+                            (errors && Object.entries(errors).length > 0) &&
+                            <div className={'md:px-4 sm:px-6 lg:px-8'}>
+                            {
+                                errors && showErrors.map(error => (
+                                    errors[error] && (
+                                    <Transition
+                                        as={'div'}
+                                        appear={true}
+                                        show={showErrors.includes(error)}
+                                        enter="transition transition-opacity ease-out duration-300"
+                                        enterFrom="opacity-0"
+                                        enterTo="opacity-100"
+                                        leave="ease-in duration-100"
+                                        leaveFrom="opacity-100"
+                                        leaveTo="opacity-0"
+                                        className={'mt-12'}
+                                        key={error}
+                                    >
+                                        <Message onClose={() => handleErrorClose(error)} variant={'error'}>{errors[error]}</Message>
+                                    </Transition>
+                                    )
+                                ))
+                            }
+                            </div>
+                        }
+
                         {children}
                     </main>
                     <footer className={`mt-auto border-t transition-all${sidebarOpen ? ' lg:pl-72' : ' lg:pl-0'}`}>

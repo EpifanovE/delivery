@@ -8,4 +8,5 @@ return [
     'webhook_set' => 'Webhook has been set.',
     'webhook_removed' => 'Webhook has been deleted.',
     'commands_set' => 'Commands have been set.',
+    'demo_mode' => 'You cannot perform these actions in demo mode.',
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\DemoMode;
 use App\Http\Middleware\TelegramBlock;
 use App\Http\Middleware\TelegramSubscriber;
 use App\Http\Middleware\TelegramTouch;
@@ -41,6 +42,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            DemoMode::class,
         ],
 
         'telegram' => [

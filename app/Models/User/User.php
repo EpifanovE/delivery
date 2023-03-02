@@ -53,6 +53,15 @@ class User extends Authenticatable
         return $this->is_super;
     }
 
+    public function isDemoUser(): bool
+    {
+        if (!config('app.demo')) {
+            return false;
+        }
+
+        return !$this->isSuper();
+    }
+
     public function scopeSearch(Builder $query, string $search)
     {
         $query

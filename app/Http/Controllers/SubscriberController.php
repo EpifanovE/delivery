@@ -17,6 +17,10 @@ class SubscriberController extends Controller
     {
         $query = Subscriber::query();
 
+        if ($request->user()->isDemoUser()) {
+            $query->demo();
+        }
+
         if (!empty($request->get('s'))) {
             $query->search($request->get('s'));
         }
@@ -47,6 +51,10 @@ class SubscriberController extends Controller
 
     public function edit(Subscriber $subscriber)
     {
+        if (request()->user()->isDemoUser()) {
+            throw new NotFoundHttpException();
+        }
+
         return Inertia::render('Subscribers/Edit', [
             'item' => new SubscriberResource($subscriber),
         ]);
