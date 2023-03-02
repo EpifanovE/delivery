@@ -88,9 +88,9 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
                     />
 
                     <SidebarItem
-                        href={route('services.index')}
-                        text={t('services')}
-                        active={route().current('services.index')}
+                        href={route('products.index')}
+                        text={t('products')}
+                        active={route().current('products.index')}
                         prepend={<BagIcon className={'w-6 h-6 mr-3 fill-gray-300'} />}
                     />
 

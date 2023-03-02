@@ -1,8 +1,8 @@
 import * as React from "react";
 import {FC, useEffect, useState} from "react";
-import {ServiceServerItem} from "../../common/types/services";
 import SelectInput from "./SelectInput";
 import { CSSTransition } from 'react-transition-group';
+import {ProductAttribute, ProductServerItem} from "../../common/types/products";
 
 type AppProps = {
     baseUrl?: string
@@ -10,27 +10,25 @@ type AppProps = {
 
 const App: FC<AppProps> = (props) => {
 
-    const [service, setService] = useState<ServiceServerItem>();
-
-    useEffect(() => console.log(service), [service])
+    const [product, setProduct] = useState<ProductServerItem>();
 
     useEffect(() => {
-        setService(services[0]);
-    }, [services]);
+        setProduct(products[0]);
+    }, [products]);
 
-    const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const match = services.filter(service => service.id === parseInt(e.target.value));
+    const handleProductChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const match = products.filter(product => product.id === parseInt(e.target.value));
 
         if (!match.length) return;
 
-        setService({...match[0]});
+        setProduct({...match[0]});
     }
 
     return (
         <div className={'min-h-screen px-4 py-3 flex columns flex-col bg-tg-theme-bg-color text-tg-theme-text-color'}>
             <div className={'py-3 flex justify-between items-center'}>
                 <div className={'text-2xl'}>
-                    {service?.price || 0} руб.
+                    {product?.price || 0} руб.
                 </div>
                 <div>
                     <button
@@ -42,39 +40,39 @@ const App: FC<AppProps> = (props) => {
 
             <div className={'py-3'}>
                 <SelectInput
-                    id={'service'}
-                    name={'service'}
-                    onChange={handleServiceChange}
-                    value={service?.id}
+                    id={'product'}
+                    name={'product'}
+                    onChange={handleProductChange}
+                    value={product?.id}
                     label={'Выберите автомобиль'}
                     className={'mb-4'}
                 >
                     {
-                        services.map(service => (
-                            <option value={service.id} key={service.id}>
-                                {service.name}
+                        products.map(product => (
+                            <option value={product.id} key={product.id}>
+                                {product.name}
                             </option>
                         ))
                     }
                 </SelectInput>
 
                 {
-                    service?.image &&
+                    product?.image &&
                     <CSSTransition
                         timeout={300}
                         classNames="fade"
                     >
                         <div className={'mb-4'}>
-                            <img src={service.image.full_url} />
+                            <img src={product.image.full_url} />
                         </div>
                     </CSSTransition>
                 }
 
                 {
-                    service?.attributes?.length &&
+                    product?.attributes?.length &&
                     <div className={'mb-4'}>
                         {
-                            service.attributes.map((attr, index) => (
+                            product.attributes.map((attr: ProductAttribute, index: number) => (
                                 <div key={index} className={'flex gap-4'}>
                                     <span className={'font-bold'}>{attr.name}:</span>
                                     <span className={''}>{attr.value}</span>
@@ -85,9 +83,9 @@ const App: FC<AppProps> = (props) => {
                 }
 
                 {
-                    service?.description &&
+                    product?.description &&
                     <div className={'whitespace-pre-wrap'}>
-                        {service?.description}
+                        {product?.description}
                     </div>
                 }
             </div>

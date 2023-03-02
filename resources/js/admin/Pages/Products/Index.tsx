@@ -7,22 +7,21 @@ import i18next from "i18next";
 import IndexPage, {SearchFilter} from "../../Components/IndexPage/IndexPage";
 import {useTranslation} from "react-i18next";
 import {Head} from "@inertiajs/react";
-import {UserServerItem} from "../../types/users";
-import {ServiceServerCollectionItem} from "../../types/services";
+import {ProductServerCollectionItem} from "../../../common/types/products";
 
-type ServicesIndexProps = {
-    items: ServerCollectionResponse<ServiceServerCollectionItem>
+type ProductsIndexProps = {
+    items: ServerCollectionResponse<ProductServerCollectionItem>
 } & PageProps
 
-const ServicesIndex: FC<ServicesIndexProps> = (props) => {
+const ProductsIndex: FC<ProductsIndexProps> = (props) => {
     const {t} = useTranslation();
 
     return <>
-        <Head title={t('services') as string} />
+        <Head title={t('products') as string} />
 
         <IndexPage
-            resource={'services'}
-            modelName={'service'}
+            resource={'products'}
+            modelName={'product'}
             items={props.items}
             columns={[
                 {
@@ -38,8 +37,8 @@ const ServicesIndex: FC<ServicesIndexProps> = (props) => {
                 {
                     resource: 'is_active',
                     sortable: true,
-                    label: t('is_active_service') as string,
-                    itemRender: (item: ServiceServerCollectionItem) => {
+                    label: t('is_active_product') as string,
+                    itemRender: (item: ProductServerCollectionItem) => {
                         return item.is_active ? <span className={'text-green-600'}>{t('yes')}</span> : <span className={'text-red-600'}>{t('no')}</span>
                     }
                 },
@@ -56,10 +55,10 @@ const ServicesIndex: FC<ServicesIndexProps> = (props) => {
 }
 
 //@ts-ignore
-ServicesIndex.layout = page => <AuthenticatedLayout
+ProductsIndex.layout = page => <AuthenticatedLayout
     children={page}
     {...page.props}
-    header={<PageTitle>{i18next.t('services')}</PageTitle>}
+    header={<PageTitle>{i18next.t('products')}</PageTitle>}
 />
 
-export default ServicesIndex;
+export default ProductsIndex;

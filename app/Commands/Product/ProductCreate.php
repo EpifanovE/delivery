@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Commands\Service;
+namespace App\Commands\Product;
 
 use App\Commands\Attachment\AttachmentCreateByModel;
-use App\Models\Service\Service;
+use App\Models\Product\Product;
 use Illuminate\Http\UploadedFile;
 
-class ServiceCreate
+class ProductCreate
 {
     protected AttachmentCreateByModel $attachmentCreateByModel;
 
@@ -17,18 +17,18 @@ class ServiceCreate
         $this->attachmentCreateByModel = $attachmentCreateByModel;
     }
 
-    public function handle(array $data): Service
+    public function handle(array $data): Product
     {
         $data['description'] = $data['description'] ?? '';
 
-        $service = Service::create($data);
+        $product = Product::create($data);
 
         if (!empty($data['image']) && $data['image'] instanceof UploadedFile) {
-            $this->attachmentCreateByModel->handle($service, $data);
+            $this->attachmentCreateByModel->handle($product, $data);
         }
 
-        $service->refresh();
+        $product->refresh();
 
-        return $service;
+        return $product;
     }
 }

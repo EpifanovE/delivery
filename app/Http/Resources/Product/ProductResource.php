@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources\Service;
+namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Attachment\AttachmentThumbResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ServiceResource extends JsonResource
+class ProductResource extends JsonResource
 {
     public function toArray($request)
     {

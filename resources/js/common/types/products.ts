@@ -1,12 +1,12 @@
-export type ServiceAttribute = {name: string, value?: string | null}
+export type ProductAttribute = {name: string, value?: string | null}
 
-export type ServiceServerItem = {
+export type ProductServerItem = {
     id: number
     name: string
     price: number
     description?: string | null
     is_active?: boolean
-    attributes?: ServiceAttribute[]
+    attributes?: ProductAttribute[]
     image?: {
         url: string
         full_url: string
@@ -16,7 +16,7 @@ export type ServiceServerItem = {
     updated_at: string
 }
 
-export type ServiceServerCollectionItem = {
+export type ProductServerCollectionItem = {
     id: number
     name: string
     is_active?: boolean

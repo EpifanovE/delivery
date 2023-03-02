@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\WebApp;
 
-use App\Http\Resources\Service\ServiceResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Bot\Bot;
-use App\Models\Service\Service;
+use App\Models\Product\Product;
 
 class HomeController
 {
@@ -14,7 +14,7 @@ class HomeController
     {
         return view('webapp', [
             'settings' => $bot->settings,
-            'services' => ServiceResource::collection(Service::query()->active()->ordered()->get()),
+            'products' => ProductResource::collection(Product::query()->active()->ordered()->get()),
         ]);
     }
 }

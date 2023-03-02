@@ -207,7 +207,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12">
                     <div
-                        className="bg-white overflow-hidden shadow rounded-sm p-8 flex flex-col lg:flex-row wrap gap-4">
+                        className="bg-white overflow-hidden shadow rounded-sm p-8 flex flex-col lg:flex-row flex-wrap gap-4">
 
                         <div>
                             <SelectInput

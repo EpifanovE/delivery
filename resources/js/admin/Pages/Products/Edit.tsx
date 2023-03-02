@@ -16,22 +16,22 @@ import Checkbox from "../../Components/Checkbox";
 import ImageControl from "../../Components/ImageControl";
 import {router} from '@inertiajs/react'
 import TimesIcon from "../../Components/Icons/TimesIcon";
-import {ServiceAttribute, ServiceServerItem} from "../../../common/types/services";
 import TextAreaInput from "../../Components/TextAreaInput";
+import {ProductServerItem, ProductAttribute} from "../../../common/types/products";
 
 type EditProps = {
     item?: {
-        data: ServiceServerItem
+        data: ProductServerItem
     }
 }
 
-type ServiceForm = {
+type ProductForm = {
     name: string
     description: string
     price: string
     is_active: boolean
     image?: string | File | null
-    attributes: ServiceAttribute[]
+    attributes: ProductAttribute[]
     order_column: string
 }
 
@@ -43,7 +43,7 @@ const Edit: FC<EditProps> = (props) => {
         item,
     } = props;
 
-    const {data, setData, errors, processing, post} = useForm<ServiceForm>({
+    const {data, setData, errors, processing, post} = useForm<ProductForm>({
         name: item?.data?.name || '',
         description: item?.data?.description || '',
         price: item?.data?.price.toString() || '',
@@ -64,7 +64,7 @@ const Edit: FC<EditProps> = (props) => {
 
         if (item?.data.id) {
             router.post(
-                route('services.update', {service: item.data.id}),
+                route('products.update', {product: item.data.id}),
                 {
                     ...data,
                     _method: 'put'
@@ -75,7 +75,7 @@ const Edit: FC<EditProps> = (props) => {
 
         } else {
             post(
-                route('services.store'),
+                route('products.store'),
                 {
                     forceFormData: true,
                 }
@@ -108,7 +108,7 @@ const Edit: FC<EditProps> = (props) => {
 
     return (
         <>
-            <Head title={t('service') as string}/>
+            <Head title={t('product') as string}/>
 
             <div className="py-12">
                 <form onSubmit={submit}>
@@ -195,7 +195,7 @@ const Edit: FC<EditProps> = (props) => {
 
                                 <InputRow>
                                     <Label htmlFor={'is_active'}>
-                                        {t('is_active', {context: 'service'})}
+                                        {t('is_active', {context: 'product'})}
                                     </Label>
                                     <FieldGroup>
                                         <Checkbox
@@ -336,8 +336,8 @@ Edit.layout = page => <AuthenticatedLayout
         <PageTitle>
             {
                 page.props.item?.data.id ?
-                    <>{i18next.t('service')}: {page.props.item?.data?.id}</> :
-                    <>{i18next.t('service')}: {i18next.t('creation')}</>
+                    <>{i18next.t('product')}: {page.props.item?.data?.id}</> :
+                    <>{i18next.t('product')}: {i18next.t('creation')}</>
             }
 
         </PageTitle>

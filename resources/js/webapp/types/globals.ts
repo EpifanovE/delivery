@@ -1,8 +1,8 @@
 import {AxiosStatic} from "axios";
-import {ServiceServerItem} from "../../common/types/services";
+import {ProductServerItem} from "../../common/types/products";
 
 declare global {
     var axios: AxiosStatic
     var route: any
-    var services: ServiceServerItem[]
+    var products: ProductServerItem[]
 }

@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Models\Service;
+namespace App\Models\Product;
 
 use App\Contracts\HasImage;
 use App\Models\Attachment\Attachment;
+use App\Models\Order\Order;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
-class Service extends Model implements HasImage, Sortable
+class Product extends Model implements HasImage, Sortable
 {
     use HasFactory, SortableTrait;
 
@@ -51,6 +53,11 @@ class Service extends Model implements HasImage, Sortable
     public function image(): BelongsTo
     {
         return $this->belongsTo(Attachment::class, 'attachment_id');
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function scopeSearch(Builder $query, string $search)
