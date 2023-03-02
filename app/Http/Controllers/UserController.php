@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Commands\User\UserCreate;
+use App\Commands\User\UserUpdate;
 use App\Http\Requests\IndexRequest;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
@@ -16,9 +17,12 @@ class UserController extends Controller
 {
     private UserCreate $createCommand;
 
-    public function __construct(UserCreate $createCommand)
+    private UserUpdate $updateCommand;
+
+    public function __construct(UserCreate $createCommand, UserUpdate $updateCommand)
     {
         $this->createCommand = $createCommand;
+        $this->updateCommand = $updateCommand;
     }
 
     public function index(IndexRequest $request)
@@ -78,16 +82,8 @@ class UserController extends Controller
             abort(403);
         }
 
-        $data = $request->validated();
+        $this->updateCommand->handle($user, $request->validated());
 
-        if (!empty($data["password"])) {
-            $data["password"] = Hash::make($data["password"]);
-        } else {
-            unset($data['password']);
-        }
-
-        $user->fill($data);
-        $user->save();
         return redirect()->back()->with(['message' => __('messages.saved')]);
     }
 

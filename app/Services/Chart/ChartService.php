@@ -25,6 +25,25 @@ class ChartService
     const MONTHS_FORMAT = 'M. Y';
 
     /**
+     * Формирование графика заказов
+     *
+     * @param Carbon $from Начало интервала
+     * @param Carbon $to Конец интервала
+     * @param string $detailing Детализация: day, month
+     * @return array
+     */
+    public function ordersChart(Carbon $from, Carbon $to, string $detailing = 'day', ?int $botId = null): array
+    {
+        $query = DB::table('orders');
+
+        if (!empty($botId)) {
+            $query->where('bot_id', $botId);
+        }
+
+        return $this->createChartData($query, $from, $to, $detailing);
+    }
+
+    /**
      * Формирование графика новых подписчиков
      *
      * @param Carbon $from Начало интервала

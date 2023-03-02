@@ -28,7 +28,7 @@ const DeliverySettings: FC<DeliverySettingsProps> = ({value, onChange, disabled,
     return (
         <Card>
             <CardBody>
-                <InputRow>
+                <InputRow className={'mb-6 md:mb-3'}>
                     <Label htmlFor={'workers_max_count'}>
                         {t('workers_max_count')}
                     </Label>
@@ -48,7 +48,7 @@ const DeliverySettings: FC<DeliverySettingsProps> = ({value, onChange, disabled,
                     </div>
                 </InputRow>
 
-                <InputRow>
+                <InputRow className={'mb-6 md:mb-3'}>
                     <Label htmlFor={'workers_price'}>
                         {t('workers_price')}
                     </Label>
@@ -68,7 +68,7 @@ const DeliverySettings: FC<DeliverySettingsProps> = ({value, onChange, disabled,
                     </div>
                 </InputRow>
 
-                <InputRow>
+                <InputRow className={'mb-6 md:mb-3'}>
                     <Label htmlFor={'workers_min_hours'}>
                         {t('workers_min_hours')}
                     </Label>
@@ -88,7 +88,7 @@ const DeliverySettings: FC<DeliverySettingsProps> = ({value, onChange, disabled,
                     </div>
                 </InputRow>
 
-                <InputRow>
+                <InputRow className={'mb-6 md:mb-3'}>
                     <Label htmlFor={'workers_max_hours'}>
                         {t('workers_max_hours')}
                     </Label>
@@ -108,7 +108,7 @@ const DeliverySettings: FC<DeliverySettingsProps> = ({value, onChange, disabled,
                     </div>
                 </InputRow>
 
-                <InputRow>
+                <InputRow className={'mb-6 md:mb-3'}>
                     <Label htmlFor={'rent_min'}>
                         {t('rent_min')}
                     </Label>

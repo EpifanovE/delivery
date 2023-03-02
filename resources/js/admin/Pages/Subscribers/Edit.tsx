@@ -41,7 +41,7 @@ const Edit: FC<EditProps> = (props) => {
 
                     <Card>
                         <CardBody>
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     ID
                                 </Label>
@@ -54,7 +54,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     Telegram ID
                                 </Label>
@@ -67,7 +67,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('username')}
                                 </Label>
@@ -80,7 +80,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('first_name')}
                                 </Label>
@@ -93,7 +93,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('last_name')}
                                 </Label>
@@ -106,7 +106,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('language_code')}
                                 </Label>
@@ -119,7 +119,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('is_premium')}
                                 </Label>
@@ -131,7 +131,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('is_bot')}
                                 </Label>
@@ -143,7 +143,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </div>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('is_blocked')}
                                 </Label>
@@ -158,7 +158,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </Button>
                             </InputRow>
 
-                            <InputRow>
+                            <InputRow className={'mb-6 md:mb-3'}>
                                 <Label>
                                     {t('created_at', {context: 'male'})}
                                 </Label>

@@ -45,9 +45,11 @@ type DashboardProps = {
     bots: {
         data: BotServerCollectionItem[]
     }
+    orders_today: number,
     subscribers: number
     new_subscribers: number
     visits: number,
+    orders_chart: ChartData
     new_subscribers_chart: ChartData
     visits_chart: ChartData
 }
@@ -62,9 +64,11 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
     const {
         bots,
+        orders_today,
         subscribers,
         new_subscribers,
         visits,
+        orders_chart,
         new_subscribers_chart,
         visits_chart,
     } = props;
@@ -181,7 +185,13 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
             <div className="py-12">
                 <div
-                    className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12 flex flex-wrap grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12 flex flex-wrap grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+                    <div className='p-8 bg-blue-300 w-full shadow rounded-sm text-gray-800 col-12 lg:col-4'>
+                        <p className='uppercase text-gray-600 font-semibold mb-2'>{t('orders')}</p>
+                        <h2 className='text-5xl font-semibold mb-2'>{orders_today}</h2>
+                        <p className='text-gray-600 lowercase'>{t('for_today')}</p>
+                    </div>
 
                     <div className='p-8 bg-red-300 w-full shadow rounded-sm text-gray-800'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('subscribers')}</p>
@@ -284,6 +294,24 @@ const Dashboard: FC<DashboardProps> = (props) => {
                         >
                             {t('buttons.apply')}
                         </Button>
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-12">
+                    <div className="bg-white overflow-hidden shadow rounded-sm p-3 lg:p-8 flex gap-8">
+                        <Line
+                            options={getChartOptions(t('orders'))}
+                            data={{
+                                labels: orders_chart.labels,
+                                datasets: [
+                                    {
+                                        data: orders_chart.values,
+                                        borderColor: '#27ae60',
+                                        backgroundColor: '#27ae60',
+                                    },
+                                ],
+                            }}
+                        />
                     </div>
                 </div>
 

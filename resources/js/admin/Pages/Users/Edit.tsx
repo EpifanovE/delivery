@@ -68,7 +68,7 @@ const Edit: FC<EditProps> = (props) => {
                             <CardBody>
                                 {
                                     item?.data.id &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
                                             ID
                                         </Label>
@@ -82,7 +82,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </InputRow>
                                 }
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'name'}>
                                         {t('name', {context: 'human'})}
                                     </Label>
@@ -99,7 +99,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </FieldGroup>
                                 </InputRow>
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'email'}>
                                         {t('email')}
                                     </Label>
@@ -116,7 +116,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </FieldGroup>
                                 </InputRow>
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'super_admin'}>
                                         {t('super_admin')}
                                     </Label>
@@ -133,7 +133,7 @@ const Edit: FC<EditProps> = (props) => {
 
                                 {
                                     item?.data.created_at &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
                                             {t('created_at', {context: 'male'})}
                                         </Label>
@@ -148,7 +148,7 @@ const Edit: FC<EditProps> = (props) => {
 
                                 {
                                     item?.data.updated_at &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
                                             {t('updated_at', {context: 'male'})}
                                         </Label>
@@ -169,7 +169,7 @@ const Edit: FC<EditProps> = (props) => {
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label>
                                         {t('new_password')}
                                     </Label>

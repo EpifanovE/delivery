@@ -3,6 +3,7 @@
 use App\Http\Controllers\BotController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriberController;
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::resource('users', UserController::class)->except('show');
 
     Route::resource('products', ProductController::class)->except('show');
+
+    Route::resource('orders', OrderController::class)->except('show');
 });
 
 Route::get('/lang/{langCode}/translation.json', [LangController::class, 'view'])->name('translation');

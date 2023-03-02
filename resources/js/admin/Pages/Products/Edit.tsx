@@ -126,7 +126,7 @@ const Edit: FC<EditProps> = (props) => {
                             <CardBody>
                                 {
                                     item?.data.id &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
                                             ID
                                         </Label>
@@ -140,7 +140,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </InputRow>
                                 }
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'name'}>
                                         {t('name')}
                                     </Label>
@@ -157,7 +157,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </FieldGroup>
                                 </InputRow>
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'description'}>
                                         {t('description')}
                                     </Label>
@@ -173,7 +173,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </FieldGroup>
                                 </InputRow>
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'price'}>
                                         {t('price')}
                                     </Label>
@@ -193,7 +193,7 @@ const Edit: FC<EditProps> = (props) => {
                                     </FieldGroup>
                                 </InputRow>
 
-                                <InputRow>
+                                <InputRow className={'mb-6 md:mb-3'}>
                                     <Label htmlFor={'is_active'}>
                                         {t('is_active', {context: 'product'})}
                                     </Label>
@@ -210,7 +210,7 @@ const Edit: FC<EditProps> = (props) => {
 
                                 {
                                     !!item?.data?.id &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label htmlFor={'order_column'}>
                                             {t('sort_order')}
                                         </Label>
@@ -232,9 +232,9 @@ const Edit: FC<EditProps> = (props) => {
 
                                 {
                                     item?.data.created_at &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
-                                            {t('created_at', {context: 'male'})}
+                                            {t('created_at')}
                                         </Label>
                                         <FieldGroup>
                                             <TextInput
@@ -247,9 +247,9 @@ const Edit: FC<EditProps> = (props) => {
 
                                 {
                                     item?.data.updated_at &&
-                                    <InputRow>
+                                    <InputRow className={'mb-6 md:mb-3'}>
                                         <Label>
-                                            {t('updated_at', {context: 'male'})}
+                                            {t('updated_at')}
                                         </Label>
                                         <FieldGroup>
                                             <TextInput

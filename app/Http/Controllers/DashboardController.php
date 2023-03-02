@@ -9,6 +9,7 @@ use App\Http\Resources\Bot\BotCollectionResource;
 use App\Models\Bot\Bot;
 use App\Models\LogEvent\Code;
 use App\Models\LogEvent\LogEvent;
+use App\Models\Order\Order;
 use App\Models\Subscriber\Subscriber;
 use App\Services\Chart\ChartService;
 use Illuminate\Support\Carbon;
@@ -35,9 +36,11 @@ class DashboardController extends Controller
 
         return Inertia::render('Dashboard', [
             'bots' => BotCollectionResource::collection(Bot::all()),
+            'orders_today' => Order::query()->today()->count(),
             'subscribers' => Subscriber::query()->bot($botId)->count(),
             'new_subscribers' => Subscriber::query()->today()->bot($botId)->count(),
             'visits' => LogEvent::query()->today()->code(Code::Visit)->bot($botId)->count(),
+            'orders_chart' => $this->chartService->ordersChart($from, $to, $detailing, $botId),
             'new_subscribers_chart' => $this->chartService->newSubscribersChart($from, $to, $detailing, $botId),
             'visits_chart' => $this->chartService->visitsChart($from, $to, $detailing, $botId),
         ]);

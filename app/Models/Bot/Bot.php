@@ -6,6 +6,7 @@ use App\Exceptions\DomainException;
 use App\Models\Attachment\Attachment;
 use App\Models\Subscriber\Subscriber;
 use App\Services\Telegram\BotTypes\BotType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -84,5 +85,12 @@ class Bot extends Model
     public function getWebHookUrl(): string
     {
         return trim(config('telegram.host'), '/'). '/telegram-api/' . $this->token;
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        $query
+            ->where('id', $search)
+            ->orWhere('name', 'like', '%' . $search . '%');
     }
 }

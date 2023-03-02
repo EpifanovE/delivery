@@ -36,7 +36,7 @@ export default forwardRef<HTMLSelectElement, TextInputProps>(function textInput(
             id={id}
             value={value}
             className={
-                `border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-sm shadow-sm ` +
+                `border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-sm shadow-sm mt-1 ` +
                 className
             }
             ref={input}

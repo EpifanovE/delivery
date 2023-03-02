@@ -80,6 +80,13 @@ return [
     'image' => 'Image',
     'all_bots' => 'All bots',
     'custom_period' => 'Custom period',
+    'orders' => 'Orders',
+    'order' => 'Order',
+    'sum' => 'Total',
+    'rub' => 'rub.',
+    'status' => 'Status',
+    'not_defined' => 'Not defined',
+    'notes' => 'Notes',
     'buttons' => [
         'save' => 'Save',
         'edit' => 'Edit',
@@ -118,5 +125,11 @@ return [
     ],
     'bot_types' => [
         'delivery' => 'Delivery',
+    ],
+    'statuses' => [
+        'pending_order' => 'Pending',
+        'process_order' => 'Process',
+        'cancel_order' => 'Cancel',
+        'done_order' => 'Done',
     ],
 ];

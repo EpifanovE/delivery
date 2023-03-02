@@ -80,6 +80,13 @@ return [
     'image' => 'Изображение',
     'all_bots' => 'Все боты',
     'custom_period' => 'Произвольный период',
+    'orders' => 'Заказы',
+    'order' => 'Заказ',
+    'sum' => 'Сумма',
+    'rub' => 'руб.',
+    'status' => 'Статус',
+    'not_defined' => 'Не установлено',
+    'notes' => 'Примечания',
     'buttons' => [
         'save' => 'Сохранить',
         'edit' => 'Редактировать',
@@ -118,5 +125,11 @@ return [
     ],
     'bot_types' => [
         'delivery' => 'Доставка',
+    ],
+    'statuses' => [
+        'pending_order' => 'Ожидает',
+        'process_order' => 'В работе',
+        'cancel_order' => 'Отменен',
+        'done_order' => 'Завершен',
     ],
 ];

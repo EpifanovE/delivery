@@ -13,6 +13,7 @@ import DashboardIcon from "../Components/Icons/DashboardIcon";
 import BotIcon from "../Components/Icons/BotIcon";
 import UserLockIcon from "../Components/Icons/UserLockIcon";
 import BagIcon from "../Components/Icons/BagIcon";
+import MoneyIcon from "../Components/Icons/MoneyIcon";
 
 type AuthenticatedProps = {
     auth?: {
@@ -26,13 +27,14 @@ type AuthenticatedProps = {
     flash?: {
         message?: string
     }
+    orders?: number
 }
 
 const Authenticated: FC<AuthenticatedProps> = (props) => {
 
     const {t} = useTranslation();
 
-    const { auth, header, children, flash, errors, } = props;
+    const { auth, header, children, flash, errors, orders} = props;
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const [showFlash, setShowFlash] = useState(false);
@@ -84,6 +86,21 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
                     />
 
                     <SidebarItem
+                        href={route('orders.index')}
+                        text={t('orders')}
+                        active={route().current('orders.index')}
+                        prepend={<MoneyIcon className={'w-6 h-6 mr-3 fill-gray-300'} />}
+                        append={orders ? <span className={'ml-2 text-sm bg-amber-400 text-stone-800 px-2 py-1 rounded-sm'}>{orders}</span> : null}
+                    />
+
+                    <SidebarItem
+                        href={route('products.index')}
+                        text={t('products')}
+                        active={route().current('products.index')}
+                        prepend={<BagIcon className={'w-6 h-6 mr-3 fill-gray-300'} />}
+                    />
+
+                    <SidebarItem
                         href={route('bots.index')}
                         text={t('bots')}
                         active={route().current('bots.index')}
@@ -95,13 +112,6 @@ const Authenticated: FC<AuthenticatedProps> = (props) => {
                         text={t('subscribers')}
                         active={route().current('subscribers.index')}
                         prepend={<UserIcon className={'w-6 h-6 mr-3 fill-gray-300'} />}
-                    />
-
-                    <SidebarItem
-                        href={route('products.index')}
-                        text={t('products')}
-                        active={route().current('products.index')}
-                        prepend={<BagIcon className={'w-6 h-6 mr-3 fill-gray-300'} />}
                     />
 
                     {
