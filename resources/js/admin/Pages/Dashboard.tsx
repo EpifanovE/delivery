@@ -10,6 +10,7 @@ import SelectInput from "../Components/SelectInput";
 import TextInput from "../Components/TextInput";
 import moment, {Moment} from "moment";
 import {useForm} from "@inertiajs/react";
+import { useSpring, animated } from '@react-spring/web';
 
 import {
     Chart as ChartJS,
@@ -85,6 +86,11 @@ const Dashboard: FC<DashboardProps> = (props) => {
         from: null,
         to: moment(),
     });
+
+    const ordersProps = useSpring({ val: orders_today, from: { val: 0 }, config: {duration: 300} });
+    const subscribersProps = useSpring({ val: subscribers, from: { val: 0 }, config: {duration: 300} });
+    const newSubscribersProps = useSpring({ val: new_subscribers, from: { val: 0 }, config: {duration: 300} });
+    const visitsProps = useSpring({ val: visits, from: { val: 0 }, config: {duration: 300} });
 
     useEffect(() => {
 
@@ -189,27 +195,41 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
                     <div className='p-8 bg-blue-300 w-full shadow rounded-sm text-gray-800 col-12 lg:col-4'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('orders')}</p>
-                        <h2 className='text-5xl font-semibold mb-2'>{orders_today}</h2>
+                        <h2 className='text-5xl font-semibold mb-2'>
+                            <animated.div>
+                                {ordersProps.val.interpolate(val => Math.floor(val))}
+                            </animated.div>
+                        </h2>
                         <p className='text-gray-600 lowercase'>{t('for_today')}</p>
                     </div>
 
                     <div className='p-8 bg-red-300 w-full shadow rounded-sm text-gray-800'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('subscribers')}</p>
                         <h2 className='text-5xl font-semibold mb-2'>
-                            {subscribers}
+                            <animated.div>
+                                {subscribersProps.val.interpolate(val => Math.floor(val))}
+                            </animated.div>
                         </h2>
                         <p className='text-gray-600 lowercase'>{t('total')}</p>
                     </div>
 
                     <div className='p-8 bg-orange-300 w-full shadow rounded-sm text-gray-800 col-12 lg:col-4'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('subscribers')}</p>
-                        <h2 className='text-5xl font-semibold mb-2'>{new_subscribers}</h2>
+                        <h2 className='text-5xl font-semibold mb-2'>
+                            <animated.div>
+                                {newSubscribersProps.val.interpolate(val => Math.floor(val))}
+                            </animated.div>
+                        </h2>
                         <p className='text-gray-600 lowercase'>{t('for_today')}</p>
                     </div>
 
                     <div className='p-8 bg-green-300 w-full shadow rounded-sm text-gray-800 col-12 lg:col-4'>
                         <p className='uppercase text-gray-600 font-semibold mb-2'>{t('visits')}</p>
-                        <h2 className='text-5xl font-semibold mb-2'>{visits}</h2>
+                        <h2 className='text-5xl font-semibold mb-2'>
+                            <animated.div>
+                                {visitsProps.val.interpolate(val => Math.floor(val))}
+                            </animated.div>
+                        </h2>
                         <p className='text-gray-600 lowercase'>{t('for_today')}</p>
                     </div>
 

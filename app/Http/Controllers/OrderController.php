@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function index(IndexRequest $request)
     {
-        $query = Order::query()->with(['product', 'subscriber', 'bot']);
+        $query = Order::query()->with(['product', 'subscriber', 'bot'])->orderByDesc('created_at');
 
         if (!empty($request->get('s'))) {
             $query->search($request->get('s'));

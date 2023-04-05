@@ -11,7 +11,7 @@
         @viteReactRefresh
         @vite(['resources/js/webapp/app.tsx'])
         <script>
-            var services = {{ Illuminate\Support\Js::from($services) }};
+            var products = {{ Illuminate\Support\Js::from($products) }};
             var settings = {{ Illuminate\Support\Js::from($settings) }};
         </script>
     </head>

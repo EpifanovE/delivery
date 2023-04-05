@@ -36,9 +36,9 @@ class DashboardController extends Controller
 
         return Inertia::render('Dashboard', [
             'bots' => BotCollectionResource::collection(Bot::all()),
-            'orders_today' => Order::query()->today()->count(),
+            'orders_today' => Order::query()->today()->bot($botId)->count(),
             'subscribers' => Subscriber::query()->bot($botId)->count(),
-            'new_subscribers' => Subscriber::query()->today()->bot($botId)->count(),
+            'new_subscribers' => LogEvent::query()->today()->code(Code::Start)->bot($botId)->count(),
             'visits' => LogEvent::query()->today()->code(Code::Visit)->bot($botId)->count(),
             'orders_chart' => $this->chartService->ordersChart($from, $to, $detailing, $botId),
             'new_subscribers_chart' => $this->chartService->newSubscribersChart($from, $to, $detailing, $botId),

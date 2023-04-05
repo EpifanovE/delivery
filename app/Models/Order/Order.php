@@ -68,4 +68,11 @@ class Order extends Model
     {
         $query->whereDate('created_at', Carbon::today())->get();
     }
+
+    public function scopeBot(Builder $query, ?int $botId = null)
+    {
+        if (!empty($botId)) {
+            $query->where('bot_id', $botId);
+        }
+    }
 }
